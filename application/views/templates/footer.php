@@ -17,6 +17,44 @@
                     link.classList.add('active');
                 }
             });
+            
+            // Mejorar experiencia móvil
+            if (window.innerWidth <= 768) {
+                // Ajustar altura del contenido para móviles
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) {
+                    mainContent.style.minHeight = 'calc(100vh - 60px)';
+                }
+                
+                // Optimizar tablas para móviles
+                const tables = document.querySelectorAll('table');
+                tables.forEach(table => {
+                    if (!table.classList.contains('table-responsive')) {
+                        table.classList.add('table-responsive');
+                    }
+                });
+                
+                // Optimizar formularios para móviles
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    const inputs = form.querySelectorAll('input, select, textarea');
+                    inputs.forEach(input => {
+                        input.style.fontSize = '16px'; // Evita zoom en iOS
+                    });
+                });
+            }
+            
+            // Detectar cambios de orientación en móviles
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    if (window.innerWidth <= 768) {
+                        const sidebar = document.getElementById('sidebar');
+                        if (sidebar) {
+                            sidebar.classList.remove('show');
+                        }
+                    }
+                }, 100);
+            });
         });
     </script>
 </body>

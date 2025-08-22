@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/Flota/';
+$config['base_url'] = 'https://3a1256094597.ngrok-free.app/Flota/';
 
 /*
 |--------------------------------------------------------------------------

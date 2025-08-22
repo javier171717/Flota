@@ -1,0 +1,26 @@
+RewriteEngine On
+
+# Redirigir la raíz del servidor a Flota
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /Flota/ [L,R=301]
+
+# Redirigir dashboard a Flota
+RewriteCond %{REQUEST_URI} ^/dashboard/?$
+RewriteRule ^dashboard/?$ /Flota/ [L,R=301]
+
+# Permitir acceso directo a Flota
+RewriteCond %{REQUEST_URI} ^/Flota/
+RewriteRule .* - [L]
+
+# Redirigir todo lo demás a Flota
+RewriteCond %{REQUEST_URI} !^/Flota/
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteCond %{REQUEST_URI} !^/vendor/
+RewriteCond %{REQUEST_URI} !^/system/
+RewriteCond %{REQUEST_URI} !^/application/
+RewriteCond %{REQUEST_URI} !^/index\.php
+RewriteCond %{REQUEST_URI} !^/\.htaccess
+RewriteCond %{REQUEST_URI} !^/composer\.
+RewriteCond %{REQUEST_URI} !^/README
+RewriteCond %{REQUEST_URI} !^/\.git
+RewriteRule ^(.*)$ /Flota/$1 [L,R=301]

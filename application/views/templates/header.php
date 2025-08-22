@@ -2,7 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title><?php echo $title; ?> - FlotaPro</title>
     
     <!-- Bootstrap CSS -->
@@ -48,16 +51,179 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
         }
-        .btn-primary:hover {
+                .btn-primary:hover {
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+        
+        /* Estilos responsivos para móviles */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                z-index: 1050;
+                transition: left 0.3s ease;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            
+            .sidebar.show {
+                left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+                padding-top: 4rem;
+            }
+            
+            .card {
+                margin-bottom: 1rem;
+                border-radius: 0.5rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+            
+            .modal-dialog {
+                margin: 0.5rem;
+                max-width: calc(100% - 1rem);
+            }
+            
+            .h2 {
+                font-size: 1.5rem;
+                margin-top: 0;
+                padding-top: 0.5rem;
+            }
+            
+            .container-fluid {
+                padding: 0;
+            }
+            
+            .px-md-4 {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+            
+            .border-bottom {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+            
+            /* Centrar títulos de tarjetas en móviles */
+            .card-header h5,
+            .card-header h6,
+            .card-header .h5,
+            .card-header .h6 {
+                text-align: center;
+                margin-bottom: 0;
+            }
+            
+            /* Centrar títulos de secciones */
+            .card-title,
+            .card-subtitle {
+                text-align: center;
+            }
+        }
+        
+        /* Botón de menú móvil */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1060;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+        
+        /* Mejoras para pantallas pequeñas */
+        @media (max-width: 576px) {
+            .card {
+                margin: 0.5rem;
+            }
+            
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.6rem 0.8rem;
+            }
+            
+            .h2 {
+                font-size: 1.25rem;
+                text-align: center;
+            }
+            
+            .mobile-menu-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.6rem;
+            }
+            
+            .main-content {
+                padding-top: 3.5rem;
+            }
+            
+            /* Centrar todos los títulos en pantallas muy pequeñas */
+            h1, h2, h3, h4, h5, h6,
+            .h1, .h2, .h3, .h4, .h5, .h6 {
+                text-align: center;
+            }
+            
+            .card-header {
+                text-align: center;
+            }
+        }
+        
+        /* Estilos para el header móvil */
+        @media (max-width: 768px) {
+            .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom {
+                flex-direction: column;
+                align-items: center !important;
+                text-align: center;
+            }
+            
+            .h2 {
+                margin-bottom: 0.5rem;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Botón de menú móvil -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse" id="sidebar">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
                         <h4 class="text-white"><i class="fas fa-bus me-2"></i>FlotaPro</h4>
@@ -134,3 +300,70 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2"><?php echo $title; ?></h1>
                 </div>
+                
+                <!-- JavaScript para menú móvil -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+                        const sidebar = document.getElementById('sidebar');
+                        
+                        // Toggle del menú móvil
+                        mobileMenuToggle.addEventListener('click', function() {
+                            sidebar.classList.toggle('show');
+                        });
+                        
+                        // Cerrar menú al hacer clic fuera
+                        document.addEventListener('click', function(e) {
+                            if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                                sidebar.classList.remove('show');
+                            }
+                        });
+                        
+                        // Cerrar menú al hacer clic en un enlace
+                        const sidebarLinks = sidebar.querySelectorAll('a');
+                        sidebarLinks.forEach(link => {
+                            link.addEventListener('click', function() {
+                                if (window.innerWidth <= 768) {
+                                    sidebar.classList.remove('show');
+                                }
+                            });
+                        });
+                        
+                        // Detectar cambios de orientación
+                        window.addEventListener('orientationchange', function() {
+                            setTimeout(function() {
+                                if (window.innerWidth <= 768) {
+                                    sidebar.classList.remove('show');
+                                }
+                            }, 100);
+                        });
+                        
+                        // Ajustar layout en móviles
+                        function adjustMobileLayout() {
+                            if (window.innerWidth <= 768) {
+                                const title = document.querySelector('.h2');
+                                if (title) {
+                                    title.style.marginTop = '0';
+                                    title.style.paddingTop = '0.5rem';
+                                    title.style.textAlign = 'center';
+                                }
+                                
+                                // Centrar títulos de tarjetas
+                                const cardHeaders = document.querySelectorAll('.card-header h5, .card-header h6, .card-header .h5, .card-header .h6');
+                                cardHeaders.forEach(header => {
+                                    header.style.textAlign = 'center';
+                                });
+                                
+                                // Centrar títulos de secciones
+                                const cardTitles = document.querySelectorAll('.card-title, .card-subtitle');
+                                cardTitles.forEach(title => {
+                                    title.style.textAlign = 'center';
+                                });
+                            }
+                        }
+                        
+                        // Ejecutar al cargar y al cambiar tamaño
+                        adjustMobileLayout();
+                        window.addEventListener('resize', adjustMobileLayout);
+                    });
+                </script>
