@@ -1,0 +1,322 @@
+/**
+ * Estilos específicos para impresión de tickets
+ * Optimizados para impresoras y PDF
+ */
+
+/* ===== ESTILOS DE IMPRESIÓN ===== */
+@media print {
+    /* Ocultar elementos no necesarios para impresión */
+    .no-print,
+    .print-button,
+    .print-instructions {
+        display: none !important;
+    }
+    
+    /* Configuración de página */
+    @page {
+        margin: 0.3in;
+        size: A4;
+    }
+    
+    /* Estilos del cuerpo para impresión */
+    body {
+        margin: 0;
+        padding: 8px;
+        font-size: 9pt;
+        line-height: 1.1;
+        color: #000;
+        background: #fff;
+    }
+    
+    /* Forzar colores en impresión */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Evitar saltos de página no deseados */
+    .ticket-header,
+    .ticket-status,
+    .trip-info,
+    .seat-price,
+    .bus-info,
+    .passenger-info {
+        page-break-inside: avoid;
+    }
+    
+    /* Forzar salto de página si es necesario */
+    .page-break {
+        page-break-before: always;
+    }
+    
+    /* Optimizar tamaños para impresión */
+    .ticket-header {
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .company-logo {
+        font-size: 18pt;
+    }
+    
+    .company-name {
+        font-size: 14pt;
+    }
+    
+    .ticket-title {
+        font-size: 12pt;
+    }
+    
+    .ticket-code {
+        font-size: 10pt;
+        padding: 2px 6px;
+    }
+    
+    .status-badge {
+        padding: 4px 12px;
+        font-size: 10pt;
+    }
+    
+    .route {
+        font-size: 14pt;
+    }
+    
+    .seat-number,
+    .price-amount {
+        font-size: 18pt;
+    }
+    
+    .section-title {
+        font-size: 10pt;
+        padding: 2px;
+    }
+    
+    .info-row {
+        margin-bottom: 4px;
+        padding: 1px 0;
+    }
+    
+    .info-label,
+    .info-value {
+        font-size: 9pt;
+    }
+    
+    .bus-details {
+        font-size: 9pt;
+        margin-bottom: 2px;
+    }
+    
+    .placa {
+        font-size: 10pt;
+        padding: 2px 6px;
+    }
+    
+    .passenger-name {
+        font-size: 12pt;
+    }
+    
+    .passenger-email {
+        font-size: 8pt;
+    }
+    
+    .ticket-footer {
+        font-size: 7pt;
+        margin-top: 15px;
+        padding-top: 10px;
+    }
+}
+
+/* ===== ESTILOS PARA VISTA PREVIA ===== */
+@media screen {
+    /* Estilos para vista previa en pantalla */
+    .print-preview {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    /* Botón de impresión flotante */
+    .print-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .print-button:hover {
+        background: linear-gradient(45deg, #0056b3, #004085);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+    }
+    
+    .print-button:active {
+        transform: translateY(0);
+    }
+    
+    /* Instrucciones de impresión */
+    .print-instructions {
+        background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        border: 2px solid #dee2e6;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 10px;
+        font-size: 12px;
+        color: #495057;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .print-instructions strong {
+        color: #007bff;
+    }
+    
+    /* Mejoras visuales para pantalla */
+    .ticket-header {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    
+    .trip-info {
+        box-shadow: 0 4px 15px rgba(0,123,255,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .trip-info:hover {
+        transform: translateY(-2px);
+    }
+    
+    .bus-info {
+        box-shadow: 0 4px 15px rgba(40,167,69,0.1);
+    }
+    
+    .passenger-info {
+        box-shadow: 0 4px 15px rgba(255,152,0,0.1);
+    }
+    
+    .seat-price {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .info-section {
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    .info-section:hover {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+}
+
+/* ===== ESTILOS RESPONSIVOS ===== */
+@media (max-width: 768px) {
+    .ticket-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .seat-price {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .print-button {
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+    
+    .print-instructions {
+        margin: 15px 0;
+        padding: 12px;
+        font-size: 11px;
+    }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ticket-header,
+.ticket-status,
+.trip-info,
+.seat-price,
+.bus-info,
+.passenger-info,
+.ticket-info {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ===== ESTILOS PARA DARK MODE (opcional) ===== */
+@media (prefers-color-scheme: dark) {
+    .print-instructions {
+        background: linear-gradient(45deg, #2d3748, #4a5568);
+        color: #e2e8f0;
+        border-color: #718096;
+    }
+    
+    .print-instructions strong {
+        color: #63b3ed;
+    }
+}
+
+/* ===== ESTILOS PARA ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+    .ticket-header,
+    .ticket-status,
+    .trip-info,
+    .seat-price,
+    .bus-info,
+    .passenger-info,
+    .ticket-info {
+        animation: none;
+    }
+    
+    .print-button:hover {
+        transform: none;
+    }
+    
+    .trip-info:hover {
+        transform: none;
+    }
+}
+
+/* ===== ESTILOS PARA ALTA CONTRASTE ===== */
+@media (prefers-contrast: high) {
+    .ticket-header {
+        border-bottom: 3px solid #000;
+    }
+    
+    .info-section {
+        border: 2px solid #000;
+    }
+    
+    .trip-info,
+    .bus-info,
+    .passenger-info,
+    .seat-info,
+    .price-info {
+        border-width: 3px;
+    }
+    
+    .status-badge {
+        border: 2px solid #000;
+    }
+}

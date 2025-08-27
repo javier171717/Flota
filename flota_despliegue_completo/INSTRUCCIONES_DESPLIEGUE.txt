@@ -1,0 +1,42 @@
+﻿INSTRUCCIONES DE DESPLIEGUE - FLOTA PRO
+
+PASOS A SEGUIR:
+
+1. RESPALDO DE BASE DE DATOS (OBLIGATORIO):
+   - Acceder a phpMyAdmin del servidor remoto
+   - Exportar base de datos: if0_39762769_flota_db
+   - Guardar como: flota_backup_[fecha].sql
+
+2. LIMPIAR SERVIDOR REMOTO:
+   - File Manager de InfinityFree
+   - Eliminar TODOS los archivos y carpetas
+   - Verificar que este completamente vacio
+
+3. SUBIR ARCHIVOS:
+   - Subir TODOS los archivos de esta carpeta al servidor
+   - Usar File Manager de InfinityFree
+   - Verificar que se suban correctamente
+
+4. RESTAURAR BASE DE DATOS:
+   - Importar el backup en phpMyAdmin
+   - Verificar que se restaure correctamente
+
+5. PROBAR:
+   - Acceder a: https://flota.infinityfree.me/
+   - Probar registro de conductor
+   - Verificar que no haya errores HTTP 500
+
+6. OPTIMIZAR:
+   - Cambiar db_debug a FALSE en database.php
+   - Cambiar save_queries a FALSE en database.php
+
+IMPORTANTE:
+- Mantener backup de la base de datos
+- Verificar que todos los archivos se suban
+- Probar todas las funcionalidades antes de considerar listo
+
+SOPORTE:
+Si tienes problemas, revisar:
+- Logs de la aplicacion: application/logs/
+- Configuracion de base de datos
+- Permisos de archivos en el servidor

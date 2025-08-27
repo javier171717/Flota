@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Completa - Sistema de Gestión de Flota</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #007bff;
+            font-size: 28px;
+            margin: 0;
+        }
+        
+        .header h2 {
+            color: #666;
+            font-size: 18px;
+            margin: 10px 0 0 0;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        
+        .section h3 {
+            color: #007bff;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .subsection {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        .subsection h4 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .table th, .table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 5px 0;
+            padding: 5px 0;
+        }
+        
+        .toc a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚌 SISTEMA DE GESTIÓN DE FLOTA DE BUSES</h1>
+        <h2>Documentación Técnica Completa del Proyecto</h2>
+        <p><strong>Desarrollado en CodeIgniter 3 con Arquitectura MVC</strong></p>
+        <p><em>Fecha: <?php echo date('d/m/Y'); ?></em></p>
+    </div>
+
+    <div class="toc">
+        <h3>📋 ÍNDICE DEL DOCUMENTO</h3>
+        <ul>
+            <li><a href="#overview">1. Visión General del Proyecto</a></li>
+            <li><a href="#architecture">2. Arquitectura del Sistema</a></li>
+            <li><a href="#database">3. Base de Datos y Modelos</a></li>
+            <li><a href="#controllers">4. Controladores y Lógica de Negocio</a></li>
+            <li><a href="#views">5. Vistas y Interfaz de Usuario</a></li>
+            <li><a href="#security">6. Sistema de Seguridad y Permisos</a></li>
+            <li><a href="#tickets">7. Sistema de Tickets (Funcionalidad Especial)</a></li>
+            <li><a href="#deployment">8. Despliegue y Configuración</a></li>
+            <li><a href="#testing">9. Pruebas y Depuración</a></li>
+            <li><a href="#maintenance">10. Mantenimiento y Mejoras</a></li>
+        </ul>
+    </div>
+
+    <div id="overview" class="section">
+        <h3>1. 🎯 VISIÓN GENERAL DEL PROYECTO</h3>
+        
+        <div class="subsection">
+            <h4>1.1 Descripción del Sistema</h4>
+            <p>El Sistema de Gestión de Flota de Buses es una aplicación web desarrollada en <strong>CodeIgniter 3</strong> que permite gestionar integralmente una flota de transporte público. El sistema implementa el patrón <strong>MVC (Modelo-Vista-Controlador)</strong> y maneja relaciones <strong>maestro-detalle</strong> para la gestión de viajes.</p>
+        </div>
+
+        <div class="subsection">
+            <h4>1.2 Tecnologías Utilizadas</h4>
+            <ul>
+                <li><strong>Backend:</strong> PHP 7.4+, CodeIgniter 3</li>
+                <li><strong>Base de Datos:</strong> MySQL 5.7+</li>
+                <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Bootstrap 5</li>
+                <li><strong>Servidor:</strong> XAMPP (Apache + MySQL + PHP)</li>
+                <li><strong>Iconos:</strong> Font Awesome</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>1.3 Funcionalidades Principales</h4>
+            <ul>
+                <li>✅ Gestión completa de buses (CRUD)</li>
+                <li>✅ Gestión de conductores y licencias</li>
+                <li>✅ Definición y gestión de rutas</li>
+                <li>✅ Programación de viajes con detalles</li>
+                <li>✅ Sistema de tickets para pasajeros</li>
+                <li>✅ Dashboard con estadísticas</li>
+                <li>✅ Sistema de permisos por roles</li>
+                <li>✅ Interfaz responsiva y moderna</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="architecture" class="section">
+        <h3>2. 🏗️ ARQUITECTURA DEL SISTEMA</h3>
+        
+        <div class="subsection">
+            <h4>2.1 Patrón MVC Implementado</h4>
+            <p>El sistema sigue estrictamente el patrón <strong>MVC</strong> para separar las responsabilidades:</p>
+            
+            <div class="code-block">
+<strong>📁 application/</strong>
+├── <strong>controllers/</strong>     → Lógica de negocio y control de flujo
+├── <strong>models/</strong>         → Acceso a datos y lógica de negocio
+├── <strong>views/</strong>          → Interfaz de usuario y presentación
+├── <strong>config/</strong>         → Configuración del sistema
+├── <strong>libraries/</strong>      → Librerías personalizadas
+└── <strong>helpers/</strong>        → Funciones auxiliares
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>2.2 Estructura de Directorios</h4>
+            <div class="code-block">
+Flota/
+├── application/          # Código de la aplicación
+│   ├── controllers/     # Controladores
+│   ├── models/         # Modelos
+│   ├── views/          # Vistas
+│   ├── config/         # Configuración
+│   ├── libraries/      # Librerías personalizadas
+│   └── helpers/        # Funciones auxiliares
+├── system/             # Core de CodeIgniter
+├── assets/             # CSS, JS, imágenes
+├── database/           # Scripts SQL
+└── vendor/             # Dependencias Composer
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>2.3 Flujo de Datos</h4>
+            <p>El flujo de datos en el sistema sigue esta secuencia:</p>
+            <ol>
+                <li><strong>Usuario</strong> interactúa con la interfaz</li>
+                <li><strong>Controlador</strong> recibe la petición HTTP</li>
+                <li><strong>Modelo</strong> procesa la lógica de negocio</li>
+                <li><strong>Base de Datos</strong> almacena/recupera datos</li>
+                <li><strong>Vista</strong> renderiza la respuesta</li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="database" class="section">
+        <h3>3. 🗄️ BASE DE DATOS Y MODELOS</h3>
+        
+        <div class="subsection">
+            <h4>3.1 Estructura de la Base de Datos</h4>
+            <p>La base de datos está normalizada y contiene las siguientes tablas principales:</p>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tabla</th>
+                        <th>Propósito</th>
+                        <th>Campos Principales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>usuarios</strong></td>
+                        <td>Gestión de usuarios del sistema</td>
+                        <td>id, nombre, email, password, rol, estado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>buses</strong></td>
+                        <td>Información de vehículos</td>
+                        <td>id, placa, marca, modelo, año, capacidad, estado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>conductores</strong></td>
+                        <td>Información de conductores</td>
+                        <td>id, nombre, licencia, telefono, email, estado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>rutas</strong></td>
+                        <td>Definición de rutas</td>
+                        <td>id, nombre, origen, destino, distancia, tiempo_estimado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>viajes</strong></td>
+                        <td>Programación de viajes</td>
+                        <td>id, bus_id, conductor_id, ruta_id, fecha_salida, estado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tickets</strong></td>
+                        <td>Gestión de tickets de pasajeros</td>
+                        <td>id, codigo_ticket, pasajero_id, viaje_id, asiento, precio, estado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection">
+            <h4>3.2 Modelos Implementados</h4>
+            
+            <h5>📊 Tickets_model.php</h5>
+            <div class="code-block">
+class Tickets_model extends CI_Model {
+    // Métodos principales:
+    - create($data)           // Crear nuevo ticket
+    - get_by_id($id)         // Obtener ticket por ID
+    - get_by_pasajero($user_id) // Obtener tickets de un pasajero
+    - cancel_ticket($id)     // Cancelar ticket
+    - is_seat_available()    // Verificar disponibilidad de asiento
+    - calculate_price()      // Calcular precio basado en distancia
+}
+            </div>
+
+            <h5>🚌 Buses_model.php</h5>
+            <div class="code-block">
+class Buses_model extends CI_Model {
+    // Métodos principales:
+    - get_all()              // Obtener todos los buses
+    - get_by_id($id)        // Obtener bus específico
+    - create($data)         // Crear nuevo bus
+    - update($id, $data)    // Actualizar bus existente
+    - delete($id)           // Eliminar bus
+}
+            </div>
+
+            <h5>👨‍💼 Conductores_model.php</h5>
+            <div class="code-block">
+class Conductores_model extends CI_Model {
+    // Métodos principales:
+    - get_all()              // Obtener todos los conductores
+    - get_by_id($id)        // Obtener conductor específico
+    - create($data)         // Crear nuevo conductor
+    - update($id, $data)    // Actualizar conductor existente
+    - delete($id)           // Eliminar conductor
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>3.3 Relaciones entre Tablas</h4>
+            <p>El sistema implementa relaciones bien definidas:</p>
+            <ul>
+                <li><strong>viajes → buses:</strong> Un viaje pertenece a un bus</li>
+                <li><strong>viajes → conductores:</strong> Un viaje tiene un conductor asignado</li>
+                <li><strong>viajes → rutas:</strong> Un viaje sigue una ruta específica</li>
+                <li><strong>tickets → viajes:</strong> Un ticket pertenece a un viaje</li>
+                <li><strong>tickets → usuarios:</strong> Un ticket pertenece a un pasajero</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="controllers" class="section">
+        <h3>4. 🎮 CONTROLADORES Y LÓGICA DE NEGOCIO</h3>
+        
+        <div class="subsection">
+            <h4>4.1 Controlador Principal: Flota.php</h4>
+            <p>El controlador <strong>Flota.php</strong> es el núcleo del sistema, manejando todas las operaciones principales:</p>
+            
+            <div class="code-block">
+class Flota extends CI_Controller {
+    public function __construct() {
+        // Verificación de autenticación
+        // Carga de librerías y modelos
+        // Verificación de permisos
+    }
+    
+    // Métodos principales:
+    - index()               // Dashboard principal
+    - buses()              // Gestión de buses
+    - conductores()        // Gestión de conductores
+    - rutas()              // Gestión de rutas
+    - viajes()             // Gestión de viajes
+    - tickets()            // Gestión de tickets
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>4.2 Controlador de Tickets: Tickets.php</h4>
+            <p>Controlador especializado para la gestión de tickets de pasajeros:</p>
+            
+            <div class="code-block">
+class Tickets extends CI_Controller {
+    // Métodos principales:
+    - index()               // Listar tickets según rol
+    - comprar()            // Comprar nuevo ticket
+    - ver($id)             // Ver detalle de ticket
+    - cancelar($id)        // Cancelar ticket
+    - imprimir($id)        // Generar vista de impresión
+    - get_asientos_disponibles() // AJAX para asientos
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>4.3 Controlador de Autenticación: Auth.php</h4>
+            <p>Maneja el sistema de login y registro de usuarios:</p>
+            
+            <div class="code-block">
+class Auth extends CI_Controller {
+    // Métodos principales:
+    - login()               // Proceso de login
+    - register()            // Registro de usuarios
+    - logout()              // Cerrar sesión
+    - verify_login()        // Verificar credenciales
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>4.4 Sistema de Permisos</h4>
+            <p>El sistema implementa un control de acceso basado en roles:</p>
+            
+            <div class="code-block">
+// Verificación de permisos en cada método
+if ($this->permissions->is_passenger()) {
+    // Lógica para pasajeros
+} elseif ($this->permissions->can_access('tickets')) {
+    // Lógica para administradores
+} else {
+    // Acceso denegado
+}
+            </div>
+        </div>
+    </div>
+
+    <div id="views" class="section">
+        <h3>5. 🎨 VISTAS E INTERFAZ DE USUARIO</h3>
+        
+        <div class="subsection">
+            <h4>5.1 Sistema de Plantillas</h4>
+            <p>El sistema utiliza plantillas reutilizables:</p>
+            
+            <div class="code-block">
+📁 views/templates/
+├── header.php          # Encabezado común
+├── footer.php          # Pie de página común
+└── sidebar.php         # Menú lateral de navegación
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>5.2 Vistas Principales</h4>
+            
+            <h5>🏠 Dashboard (flota/dashboard.php)</h5>
+            <p>Página principal con estadísticas y acceso rápido a todas las secciones.</p>
+            
+            <h5>🚌 Gestión de Buses (flota/buses/index.php)</h5>
+            <p>CRUD completo para la gestión de vehículos con modales y validaciones.</p>
+            
+            <h5>👨‍💼 Gestión de Conductores (flota/conductores/index.php)</h5>
+            <p>Administración de conductores con validación de licencias.</p>
+            
+            <h5>🛣️ Gestión de Rutas (flota/rutas/index.php)</h5>
+            <p>Definición y administración de rutas de transporte.</p>
+            
+            <h5>🎫 Gestión de Viajes (flota/viajes/index.php)</h5>
+            <p>Programación de viajes con relación maestro-detalle.</p>
+        </div>
+
+        <div class="subsection">
+            <h4>5.3 Sistema de Tickets</h4>
+            
+            <h5>📋 Lista de Tickets (tickets/index.php)</h5>
+            <p>Vista para administradores con todos los tickets del sistema.</p>
+            
+            <h5>👤 Mis Tickets (tickets/mis_tickets.php)</h5>
+            <p>Vista para pasajeros mostrando solo sus tickets.</p>
+            
+            <h5>👁️ Ver Ticket (tickets/ver.php)</h5>
+            <p>Detalle completo de un ticket específico.</p>
+            
+            <h5>🖨️ Imprimir Ticket (tickets/imprimir.php)</h5>
+            <p>Vista optimizada para impresión sin elementos innecesarios.</p>
+        </div>
+
+        <div class="subsection">
+            <h4>5.4 Características de la Interfaz</h4>
+            <ul>
+                <li><strong>Responsive Design:</strong> Adaptable a dispositivos móviles</li>
+                <li><strong>Bootstrap 5:</strong> Framework CSS moderno y profesional</li>
+                <li><strong>Font Awesome:</strong> Iconos intuitivos y consistentes</li>
+                <li><strong>Modales:</strong> Formularios integrados sin recargar página</li>
+                <li><strong>DataTables:</strong> Tablas interactivas con búsqueda y paginación</li>
+                <li><strong>Validaciones:</strong> Verificación en tiempo real de formularios</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="security" class="section">
+        <h3>6. 🔐 SISTEMA DE SEGURIDAD Y PERMISOS</h3>
+        
+        <div class="subsection">
+            <h4>6.1 Autenticación de Usuarios</h4>
+            <p>El sistema implementa un sistema robusto de autenticación:</p>
+            
+            <div class="code-block">
+// Verificación en cada controlador
+if (!$this->session->userdata('logged_in')) {
+    redirect('auth'); // Redirige al login si no está autenticado
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>6.2 Control de Acceso por Roles</h4>
+            <p>Sistema de permisos implementado con la librería personalizada:</p>
+            
+            <div class="code-block">
+class Permissions {
+    public function is_passenger() {
+        // Verifica si el usuario es pasajero
+    }
+    
+    public function is_admin() {
+        // Verifica si el usuario es administrador
+    }
+    
+    public function can_access($section) {
+        // Verifica acceso a secciones específicas
+    }
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>6.3 Validación de Formularios</h4>
+            <p>Validación robusta en todos los formularios:</p>
+            
+            <div class="code-block">
+$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|min_length[2]|max_length[50]');
+$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+$this->form_validation->set_rules('telefono', 'Teléfono', 'required|trim|min_length[7]|max_length[15]');
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>6.4 Protección CSRF</h4>
+            <p>CodeIgniter incluye protección automática contra ataques CSRF.</p>
+        </div>
+
+        <div class="subsection">
+            <h4>6.5 Sanitización de Datos</h4>
+            <p>Todos los datos de entrada son sanitizados antes de ser procesados.</p>
+        </div>
+    </div>
+
+    <div id="tickets" class="section">
+        <h3>7. 🎫 SISTEMA DE TICKETS (FUNCIONALIDAD ESPECIAL)</h3>
+        
+        <div class="subsection">
+            <h4>7.1 Funcionalidades del Sistema de Tickets</h4>
+            <ul>
+                <li><strong>Compra de Tickets:</strong> Formulario completo con validaciones</li>
+                <li><strong>Gestión de Asientos:</strong> Verificación de disponibilidad en tiempo real</li>
+                <li><strong>Estados de Tickets:</strong> Reservado, Confirmado, Cancelado</li>
+                <li><strong>Impresión Optimizada:</strong> Vista específica para impresión</li>
+                <li><strong>Control de Permisos:</strong> Usuarios solo ven sus propios tickets</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>7.2 Flujo de Compra de Tickets</h4>
+            <ol>
+                <li>Usuario selecciona un viaje disponible</li>
+                <li>Sistema verifica asientos disponibles</li>
+                <li>Usuario selecciona asiento y llena datos</li>
+                <li>Sistema valida información y calcula precio</li>
+                <li>Se crea el ticket y se asigna el asiento</li>
+                <li>Usuario recibe confirmación con código</li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <h4>7.3 Optimización para Impresión</h4>
+            <p>El sistema incluye una vista especial optimizada para impresión:</p>
+            
+            <div class="code-block">
+// CSS específico para impresión
+@media print {
+    @page {
+        margin: 0.3in;
+        size: A4;
+    }
+    
+    body {
+        font-size: 9pt;
+        line-height: 1.1;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+}
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>7.4 Cálculo Automático de Precios</h4>
+            <p>Los precios se calculan automáticamente basándose en la distancia de la ruta:</p>
+            
+            <div class="code-block">
+public function calculate_price($distancia) {
+    // Fórmula: $0.50 por kilómetro
+    return $distancia * 0.50;
+}
+            </div>
+        </div>
+    </div>
+
+    <div id="deployment" class="section">
+        <h3>8. 🚀 DESPLIEGUE Y CONFIGURACIÓN</h3>
+        
+        <div class="subsection">
+            <h4>8.1 Requisitos del Sistema</h4>
+            <ul>
+                <li><strong>Servidor Web:</strong> Apache 2.4+</li>
+                <li><strong>PHP:</strong> 7.4 o superior</li>
+                <li><strong>Base de Datos:</strong> MySQL 5.7+ o MariaDB 10.2+</li>
+                <li><strong>Extensiones PHP:</strong> mysqli, session, json</li>
+                <li><strong>Navegador:</strong> Chrome, Firefox, Safari, Edge (versiones modernas)</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>8.2 Instalación en XAMPP</h4>
+            <ol>
+                <li>Descargar e instalar XAMPP</li>
+                <li>Colocar el proyecto en <code>C:\xampp\htdocs\Flota\</code></li>
+                <li>Crear base de datos <code>flota_db</code> en phpMyAdmin</li>
+                <li>Importar archivo <code>database/flota.sql</code></li>
+                <li>Configurar <code>application/config/database.php</code></li>
+                <li>Acceder a <code>http://localhost/Flota/</code></li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <h4>8.3 Configuración de Base de Datos</h4>
+            <div class="code-block">
+// application/config/database.php
+$db['default'] = array(
+    'hostname' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'database' => 'flota_db',
+    'dbdriver' => 'mysqli',
+    'dbprefix' => '',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => '',
+    'encrypt' => FALSE,
+    'compress' => FALSE,
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+);
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>8.4 Despliegue en Producción</h4>
+            <p>Para despliegue en servidor de producción:</p>
+            <ul>
+                <li>Configurar <code>ENVIRONMENT = 'production'</code></li>
+                <li>Deshabilitar debug y logs innecesarios</li>
+                <li>Configurar HTTPS y certificados SSL</li>
+                <li>Implementar backup automático de base de datos</li>
+                <li>Configurar firewall y medidas de seguridad</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="testing" class="section">
+        <h3>9. 🧪 PRUEBAS Y DEPURACIÓN</h3>
+        
+        <div class="subsection">
+            <h4>9.1 Herramientas de Depuración</h4>
+            <ul>
+                <li><strong>Logs de CodeIgniter:</strong> <code>application/logs/</code></li>
+                <li><strong>Logs de MySQL:</strong> XAMPP Control Panel</li>
+                <li><strong>Herramientas del Navegador:</strong> DevTools, Console</li>
+                <li><strong>phpMyAdmin:</strong> Gestión visual de base de datos</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>9.2 Archivos de Prueba Incluidos</h4>
+            <p>El proyecto incluye varios archivos de prueba para verificar funcionalidades:</p>
+            <ul>
+                <li><code>test_tickets_fix.php</code> - Pruebas del sistema de tickets</li>
+                <li><code>test_conductor_create.php</code> - Pruebas de creación de conductores</li>
+                <li><code>test_registro_simple.php</code> - Pruebas de registro de usuarios</li>
+                <li><code>debug_conductor.php</code> - Depuración del sistema de conductores</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>9.3 Solución de Problemas Comunes</h4>
+            
+            <h5>Error 500 - Error Interno del Servidor</h5>
+            <div class="warning">
+                <strong>Solución:</strong> Verificar logs de error en <code>application/logs/</code> y permisos de archivos.
+            </div>
+            
+            <h5>Error de Conexión a Base de Datos</h5>
+            <div class="warning">
+                <strong>Solución:</strong> Verificar configuración en <code>database.php</code> y estado del servicio MySQL.
+            </div>
+            
+            <h5>Problemas de Permisos</h5>
+            <div class="warning">
+                <strong>Solución:</strong> Verificar que el usuario tenga permisos para acceder a la sección solicitada.
+            </div>
+        </div>
+    </div>
+
+    <div id="maintenance" class="section">
+        <h3>10. 🔧 MANTENIMIENTO Y MEJORAS</h3>
+        
+        <div class="subsection">
+            <h4>10.1 Mantenimiento Regular</h4>
+            <ul>
+                <li><strong>Backup de Base de Datos:</strong> Diario o semanal según volumen</li>
+                <li><strong>Limpieza de Logs:</strong> Eliminar logs antiguos mensualmente</li>
+                <li><strong>Actualizaciones de Seguridad:</strong> Mantener PHP y MySQL actualizados</li>
+                <li><strong>Monitoreo de Rendimiento:</strong> Verificar tiempos de respuesta</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>10.2 Mejoras Futuras Planificadas</h4>
+            <ul>
+                <li><strong>Sistema de Notificaciones:</strong> Email y SMS para usuarios</li>
+                <li><strong>API REST:</strong> Para integración con aplicaciones móviles</li>
+                <li><strong>Reportes Avanzados:</strong> Gráficos y estadísticas detalladas</li>
+                <li><strong>Sistema de Pagos:</strong> Integración con pasarelas de pago</li>
+                <li><strong>Dashboard Interactivo:</strong> Con gráficos en tiempo real</li>
+                <li><strong>Exportación de Datos:</strong> PDF, Excel, CSV</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h4>10.3 Escalabilidad del Sistema</h4>
+            <p>El sistema está diseñado para ser escalable:</p>
+            <ul>
+                <li><strong>Arquitectura Modular:</strong> Fácil agregar nuevas funcionalidades</li>
+                <li><strong>Base de Datos Optimizada:</strong> Índices y consultas eficientes</li>
+                <li><strong>Código Limpio:</strong> Fácil mantenimiento y extensión</li>
+                <li><strong>Separación de Responsabilidades:</strong> MVC bien implementado</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>📚 CONCLUSIONES</h3>
+        
+        <div class="success">
+            <p><strong>El Sistema de Gestión de Flota de Buses representa una implementación completa y profesional de una aplicación web empresarial.</strong></p>
+        </div>
+        
+        <p>Este proyecto demuestra:</p>
+        <ul>
+            <li><strong>Dominio de CodeIgniter 3:</strong> Framework PHP maduro y estable</li>
+            <li><strong>Implementación de MVC:</strong> Arquitectura limpia y mantenible</li>
+            <li><strong>Gestión de Base de Datos:</strong> Diseño normalizado y eficiente</li>
+            <li><strong>Interfaz de Usuario:</strong> Moderna, responsiva y profesional</li>
+            <li><strong>Sistema de Seguridad:</strong> Autenticación y autorización robustas</li>
+            <li><strong>Funcionalidades Avanzadas:</strong> Sistema de tickets e impresión optimizada</li>
+        </ul>
+        
+        <p>El código está listo para producción y puede ser fácilmente extendido con nuevas funcionalidades según las necesidades del negocio.</p>
+    </div>
+
+    <div class="footer">
+        <p><strong>Sistema de Gestión de Flota de Buses</strong> - Desarrollado con CodeIgniter 3</p>
+        <p>Documentación generada el <?php echo date('d/m/Y H:i:s'); ?></p>
+        <p>Para soporte técnico o consultas, revisar la documentación del proyecto</p>
+    </div>
+</body>
+</html>

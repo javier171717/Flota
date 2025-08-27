@@ -1,0 +1,6 @@
+__ci_last_regenerate|i:1755413234;user_id|s:1:"4";nombre|s:14:"Javier Jimenez";email|s:19:"jj4306822@gmail.com";rol|s:5:"admin";logged_in|b:1;error|s:194:"<p>El campo Placa es obligatorio.</p>
+<p>El campo Marca es obligatorio.</p>
+<p>El campo Modelo es obligatorio.</p>
+<p>El campo Año es obligatorio.</p>
+<p>El campo Capacidad es obligatorio.</p>
+";__ci_vars|a:1:{s:5:"error";s:3:"old";}

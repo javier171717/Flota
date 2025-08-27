@@ -102,6 +102,45 @@ class Viajes_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    
+    /**
+     * Obtener viajes disponibles para compra de tickets
+     */
+    public function get_available_trips() {
+        // DEBUG: Ver qué fecha está usando para comparar
+        $fecha_actual = date('Y-m-d H:i:s');
+        log_message('debug', 'Fecha actual para comparar: ' . $fecha_actual);
+        
+        $this->db->select('v.*, r.origen, r.destino, r.distancia, b.placa, b.marca, b.modelo, b.capacidad');
+        $this->db->from($this->table . ' v');
+        $this->db->join('rutas r', 'r.id = v.ruta_id');
+        $this->db->join('buses b', 'b.id = v.bus_id');
+        $this->db->where('v.estado', 'programado');
+        
+        // DEBUG: Ver qué viajes hay antes del filtro de fecha
+        $query_debug = $this->db->get();
+        log_message('debug', 'Viajes programados (sin filtro fecha): ' . print_r($query_debug->result(), true));
+        
+        // Resetear la consulta para aplicar el filtro de fecha
+        $this->db->reset_query();
+        $this->db->select('v.*, r.origen, r.destino, r.distancia, b.placa, b.marca, b.modelo, b.capacidad');
+        $this->db->from($this->table . ' v');
+        $this->db->join('rutas r', 'r.id = v.ruta_id');
+        $this->db->join('buses b', 'b.id = v.bus_id');
+        $this->db->where('v.estado', 'programado');
+        
+        // Aplicar filtro de fecha
+        $this->db->where('v.fecha_salida >', $fecha_actual);
+        $this->db->order_by('v.fecha_salida', 'ASC');
+        
+        $query = $this->db->get();
+        $result = $query->result();
+        
+        // DEBUG: Ver resultado final
+        log_message('debug', 'Viajes disponibles (con filtro fecha): ' . print_r($result, true));
+        
+        return $result;
+    }
 
     public function get_by_ruta($ruta_id) {
         $this->db->where('ruta_id', $ruta_id);

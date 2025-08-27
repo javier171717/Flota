@@ -12,6 +12,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <style>
         .sidebar {
@@ -53,6 +57,132 @@
         }
                 .btn-primary:hover {
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+        
+        /* ===== ESTILOS ESPECÍFICOS PARA TICKETS ===== */
+        /* Soluciona problemas de contraste y visibilidad */
+        
+        /* Forzar colores en badges */
+        .badge {
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .badge-primary,
+        .badge-info {
+            background: linear-gradient(45deg, #3498db, #2980b9) !important;
+            color: white !important;
+        }
+        
+        .badge-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71) !important;
+            color: white !important;
+        }
+        
+        .badge-warning {
+            background: linear-gradient(45deg, #f39c12, #e67e22) !important;
+            color: #2c3e50 !important;
+        }
+        
+        .badge-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b) !important;
+            color: white !important;
+        }
+        
+        .badge-secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d) !important;
+            color: white !important;
+        }
+        
+        /* Forzar colores en tablas */
+        .table td,
+        .table td * {
+            color: #2c3e50 !important;
+        }
+        
+        .table td small {
+            color: #7f8c8d !important;
+        }
+        
+        /* Forzar colores en texto general */
+        .text-muted {
+            color: #7f8c8d !important;
+        }
+        
+        .text-success {
+            color: #27ae60 !important;
+        }
+        
+        .text-primary {
+            color: #3498db !important;
+        }
+        
+        .text-info {
+            color: #3498db !important;
+        }
+        
+        .text-warning {
+            color: #f39c12 !important;
+        }
+        
+        .text-danger {
+            color: #e74c3c !important;
+        }
+        
+        /* Estilos específicos para información del bus */
+        .bus-info strong,
+        .bus-info span {
+            color: #2c3e50 !important;
+        }
+        
+        .bus-info small {
+            color: #7f8c8d !important;
+        }
+        
+        /* Estilos para estado y asiento */
+        .ticket-status,
+        .ticket-seat {
+            color: #2c3e50 !important;
+        }
+        
+        /* Estilos para formularios */
+        .form-control,
+        .form-select {
+            color: #2c3e50 !important;
+        }
+        
+        .form-control::placeholder {
+            color: #95a5a6 !important;
+        }
+        
+        /* Estilos para alertas */
+        .alert-info {
+            color: #2c3e50 !important;
+        }
+        
+        .alert-info strong {
+            color: #2c3e50 !important;
+        }
+        
+        /* Estilos para botones outline */
+        .btn-outline-primary {
+            color: #3498db !important;
+            border-color: #3498db !important;
+        }
+        
+        .btn-outline-success {
+            color: #27ae60 !important;
+            border-color: #27ae60 !important;
+        }
+        
+        .btn-outline-danger {
+            color: #e74c3c !important;
+            border-color: #e74c3c !important;
+        }
+        
+        .btn-outline-secondary {
+            color: #95a5a6 !important;
+            border-color: #95a5a6 !important;
         }
         
         /* Estilos responsivos para móviles */
@@ -246,13 +376,11 @@
                                 <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                             </a>
                         </li>
-                        <?php if(isset($permissions) && $permissions->can_access('buses')): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php echo (strpos(current_url(), 'flota/buses') !== false) ? 'active' : ''; ?>" href="<?php echo base_url('flota/buses'); ?>">
                                 <i class="fas fa-bus me-2"></i>Buses
                             </a>
                         </li>
-                        <?php endif; ?>
                         
                         <?php if(isset($permissions) && $permissions->can_access('conductores')): ?>
                         <li class="nav-item">
@@ -274,6 +402,14 @@
                         <li class="nav-item">
                             <a class="nav-link <?php echo (strpos(current_url(), 'flota/viajes') !== false) ? 'active' : ''; ?>" href="<?php echo base_url('flota/viajes'); ?>">
                                 <i class="fas fa-calendar-alt me-2"></i>Viajes
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        
+                        <?php if(isset($permissions) && $permissions->can_access('tickets')): ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo (strpos(current_url(), 'tickets') !== false) ? 'active' : ''; ?>" href="<?php echo base_url('tickets'); ?>">
+                                <i class="fas fa-ticket-alt me-2"></i>Tickets
                             </a>
                         </li>
                         <?php endif; ?>

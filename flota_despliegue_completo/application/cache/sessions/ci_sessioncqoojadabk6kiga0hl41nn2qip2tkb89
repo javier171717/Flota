@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1755496567;user_id|s:1:"8";nombre|s:16:"Jeronimo Jimenez";email|s:14:"jero@gamil.com";rol|s:8:"operador";logged_in|b:1;warning|s:126:"El conductor no se puede eliminar porque tiene viajes asociados. Se ha marcado como suspendido. Puedes reactivarlo más tarde.";__ci_vars|a:1:{s:7:"warning";s:3:"old";}

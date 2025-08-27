@@ -1,0 +1,192 @@
+/**
+ * Estilos específicos para las vistas de Tickets
+ * Soluciona problemas de contraste y visibilidad
+ */
+
+/* ===== VISIBILIDAD DEL TEXTO ===== */
+.ticket-info strong,
+.ticket-info span,
+.ticket-info div {
+    color: #2c3e50 !important;
+}
+
+.ticket-info small {
+    color: #7f8c8d !important;
+}
+
+/* ===== INFORMACIÓN DEL BUS ===== */
+.bus-info strong {
+    color: #2c3e50 !important;
+}
+
+.bus-info small {
+    color: #7f8c8d !important;
+}
+
+/* ===== ESTADO DEL TICKET ===== */
+.ticket-status {
+    color: #2c3e50 !important;
+}
+
+/* ===== ASIENTO ===== */
+.ticket-seat {
+    color: #2c3e50 !important;
+}
+
+/* ===== PRECIO ===== */
+.ticket-price {
+    color: #27ae60 !important;
+    font-weight: bold;
+}
+
+/* ===== CÓDIGO DEL TICKET ===== */
+.ticket-code {
+    color: #2c3e50 !important;
+}
+
+/* ===== FECHAS ===== */
+.ticket-date {
+    color: #7f8c8d !important;
+}
+
+/* ===== INFORMACIÓN DEL PASAJERO ===== */
+.passenger-info strong {
+    color: #2c3e50 !important;
+}
+
+.passenger-info small {
+    color: #7f8c8d !important;
+}
+
+/* ===== DETALLES DEL VIAJE ===== */
+.trip-info strong {
+    color: #2c3e50 !important;
+}
+
+.trip-info small {
+    color: #7f8c8d !important;
+}
+
+/* ===== FORZAR COLORES EN TABLAS ===== */
+.table-responsive .table td,
+.table-responsive .table td * {
+    color: #2c3e50 !important;
+}
+
+.table-responsive .table td small {
+    color: #7f8c8d !important;
+}
+
+/* ===== BADGES CON CONTRASTE FORZADO ===== */
+.badge {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.badge-primary,
+.badge-info {
+    background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    color: white !important;
+}
+
+.badge-success {
+    background: linear-gradient(45deg, #27ae60, #2ecc71) !important;
+    color: white !important;
+}
+
+.badge-warning {
+    background: linear-gradient(45deg, #f39c12, #e67e22) !important;
+    color: #2c3e50 !important;
+}
+
+.badge-danger {
+    background: linear-gradient(45deg, #e74c3c, #c0392b) !important;
+    color: white !important;
+}
+
+.badge-secondary {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d) !important;
+    color: white !important;
+}
+
+/* ===== OVERRIDE PARA BOOTSTRAP ===== */
+.text-muted {
+    color: #7f8c8d !important;
+}
+
+.text-success {
+    color: #27ae60 !important;
+}
+
+.text-primary {
+    color: #3498db !important;
+}
+
+.text-info {
+    color: #3498db !important;
+}
+
+.text-warning {
+    color: #f39c12 !important;
+}
+
+.text-danger {
+    color: #e74c3c !important;
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA VISTA DETALLADA ===== */
+.ticket-detail-card .card-body strong {
+    color: #2c3e50 !important;
+}
+
+.ticket-detail-card .card-body span {
+    color: #2c3e50 !important;
+}
+
+.ticket-detail-card .card-body small {
+    color: #7f8c8d !important;
+}
+
+/* ===== ESTILOS PARA FORMULARIOS ===== */
+.form-control,
+.form-select {
+    color: #2c3e50 !important;
+}
+
+.form-control::placeholder {
+    color: #95a5a6 !important;
+}
+
+/* ===== ESTILOS PARA ALERTAS ===== */
+.alert-info {
+    color: #2c3e50 !important;
+}
+
+.alert-info strong {
+    color: #2c3e50 !important;
+}
+
+/* ===== ESTILOS PARA BOTONES ===== */
+.btn {
+    color: white !important;
+}
+
+.btn-outline-primary {
+    color: #3498db !important;
+    border-color: #3498db !important;
+}
+
+.btn-outline-success {
+    color: #27ae60 !important;
+    border-color: #27ae60 !important;
+}
+
+.btn-outline-danger {
+    color: #e74c3c !important;
+    border-color: #e74c3c !important;
+}
+
+.btn-outline-secondary {
+    color: #95a5a6 !important;
+    border-color: #95a5a6 !important;
+}

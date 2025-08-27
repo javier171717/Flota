@@ -333,6 +333,7 @@
 .table td {
     padding: 0.75rem 1rem;
     vertical-align: middle;
+    color: #2c3e50 !important; /* Forzar color oscuro para el texto */
 }
 
 .table tbody tr:hover {
@@ -341,28 +342,115 @@
     transition: all 0.2s ease;
 }
 
+/* Asegurar que el texto en las celdas sea visible */
+.table td strong,
+.table td span,
+.table td div {
+    color: #2c3e50 !important;
+}
+
+.table td small {
+    color: #7f8c8d !important;
+}
+
+/* Estilos específicos para información del bus */
+.table td .bus-info strong {
+    color: #2c3e50 !important;
+}
+
+.table td .bus-info small {
+    color: #7f8c8d !important;
+}
+
 /* ===== BADGES MEJORADOS ===== */
 .badge {
     font-size: 0.8rem;
     padding: 0.5rem 0.75rem;
     border-radius: 20px;
     font-weight: 600;
+    color: white !important; /* Forzar color blanco para el texto */
 }
 
+/* Clases de badges estándar */
+.badge-primary {
+    background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    color: white !important;
+}
+
+.badge-secondary {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d) !important;
+    color: white !important;
+}
+
+.badge-success {
+    background: linear-gradient(45deg, #27ae60, #2ecc71) !important;
+    color: white !important;
+}
+
+.badge-danger {
+    background: linear-gradient(45deg, #e74c3c, #c0392b) !important;
+    color: white !important;
+}
+
+.badge-warning {
+    background: linear-gradient(45deg, #f39c12, #e67e22) !important;
+    color: white !important;
+}
+
+.badge-info {
+    background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    color: white !important;
+}
+
+.badge-light {
+    background: linear-gradient(45deg, #ecf0f1, #bdc3c7) !important;
+    color: #2c3e50 !important;
+}
+
+.badge-dark {
+    background: linear-gradient(45deg, #2c3e50, #34495e) !important;
+    color: white !important;
+}
+
+/* Clases de badges con bg- (Bootstrap 5) */
 .badge.bg-success {
     background: linear-gradient(45deg, #27ae60, #2ecc71) !important;
+    color: white !important;
 }
 
 .badge.bg-danger {
     background: linear-gradient(45deg, #e74c3c, #c0392b) !important;
+    color: white !important;
 }
 
 .badge.bg-warning {
     background: linear-gradient(45deg, #f39c12, #e67e22) !important;
+    color: #2c3e50 !important; /* Texto oscuro para mejor contraste */
 }
 
 .badge.bg-info {
     background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    color: white !important;
+}
+
+.badge.bg-primary {
+    background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    color: white !important;
+}
+
+.badge.bg-secondary {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d) !important;
+    color: white !important;
+}
+
+.badge.bg-light {
+    background: linear-gradient(45deg, #ecf0f1, #bdc3c7) !important;
+    color: #2c3e50 !important;
+}
+
+.badge.bg-dark {
+    background: linear-gradient(45deg, #2c3e50, #34495e) !important;
+    color: white !important;
 }
 
 /* ===== UTILIDADES ===== */

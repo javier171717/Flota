@@ -15,6 +15,7 @@ class Permissions {
             'rutas' => 'full',
             'viajes' => 'full',
             'usuarios' => 'full',
+            'tickets' => 'full',    // Admin puede ver y crear tickets
             'reportes' => 'full',
             'configuracion' => 'full'
         ),
@@ -25,6 +26,7 @@ class Permissions {
             'rutas' => 'read',
             'viajes' => 'full',     // Los operadores gestionan viajes
             'usuarios' => 'none',
+            'tickets' => 'full',    // Operadores pueden ver y crear tickets
             'reportes' => 'read',
             'configuracion' => 'none'
         ),
@@ -35,8 +37,20 @@ class Permissions {
             'rutas' => 'read',      // Solo ver rutas
             'viajes' => 'limited',  // Solo ver y actualizar sus viajes
             'usuarios' => 'none',
+            'tickets' => 'read',    // Conductores pueden ver tickets de sus viajes
             'reportes' => 'limited',
             'configuracion' => 'none'
+        ),
+        'pasajero' => array(
+            'dashboard' => 'limited',    // Solo ver sus tickets y viajes
+            'buses' => 'none',          // Sin acceso
+            'conductores' => 'none',    // Sin acceso
+            'rutas' => 'read',          // Ver rutas disponibles
+            'viajes' => 'limited',      // Ver viajes disponibles y comprar
+            'usuarios' => 'none',       // Sin acceso
+            'tickets' => 'full',        // Gestionar sus propios tickets
+            'reportes' => 'none',       // Sin acceso
+            'configuracion' => 'none'   // Sin acceso
         )
     );
     
@@ -136,6 +150,37 @@ class Permissions {
      */
     public function is_driver() {
         return $this->user_rol === 'conductor';
+    }
+    
+    /**
+     * Verificar si el usuario es pasajero
+     */
+    public function is_passenger() {
+        return $this->user_rol === 'pasajero';
+    }
+    
+    /**
+     * Verificar si el usuario puede gestionar tickets (especial para pasajeros)
+     */
+    public function can_manage_tickets() {
+        if ($this->is_passenger()) {
+            return true; // Los pasajeros pueden gestionar sus tickets
+        }
+        return $this->can_access('tickets', 'create');
+    }
+    
+    /**
+     * Verificar si el usuario puede ver todos los tickets o solo los suyos
+     */
+    public function can_see_all_tickets() {
+        return !$this->is_passenger(); // Solo pasajeros ven limitado
+    }
+    
+    /**
+     * Verificar si el usuario puede comprar tickets
+     */
+    public function can_buy_tickets() {
+        return $this->is_passenger() || $this->is_admin() || $this->is_operator();
     }
     
     /**

@@ -9,7 +9,7 @@ class Usuarios_model extends CI_Model {
     }
 
     public function get_all() {
-        $this->db->select('id, nombre, email, rol, estado, fecha_registro, fecha_ultimo_login');
+        $this->db->select('id, nombre, email, rol, estado, fecha_registro, fecha_ultimo_login, telefono');
         $this->db->from($this->table);
         $this->db->order_by('nombre', 'ASC');
         $query = $this->db->get();
@@ -78,7 +78,7 @@ class Usuarios_model extends CI_Model {
     }
 
     public function get_active() {
-        $this->db->select('id, nombre, email, rol');
+        $this->db->select('id, nombre, email, rol, telefono');
         $this->db->from($this->table);
         $this->db->where('estado', 'activo');
         $this->db->order_by('nombre', 'ASC');

@@ -1,0 +1,150 @@
+# .htaccess para Servidor Remoto (InfinityFree)
+# Este archivo debe renombrarse a .htaccess en el servidor
+
+# Configuración de PHP para servidor remoto
+<IfModule mod_php.c>
+    # Límites de memoria y tiempo
+    php_value memory_limit 128M
+    php_value max_execution_time 120
+    php_value max_input_time 120
+    php_value post_max_size 8M
+    php_value upload_max_filesize 2M
+    
+    # Configuración de errores
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value error_reporting E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT
+    
+    # Configuración de sesiones
+    php_value session.gc_maxlifetime 7200
+    php_value session.cookie_lifetime 0
+    php_value session.use_strict_mode 0
+    
+    # Configuración de base de datos
+    php_value mysql.connect_timeout 30
+    php_value mysql.read_timeout 30
+    php_value mysql.write_timeout 30
+</IfModule>
+
+# Configuración de seguridad
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Configuración de compresión
+<IfModule mod_deflate.c>
+    # Desactivar compresión para evitar problemas
+    SetEnv no-gzip 1
+    SetEnv dont-vary 1
+</IfModule>
+
+# Configuración de caché
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+</IfModule>
+
+# Configuración de reescritura para CodeIgniter
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirigir www a no-www (opcional)
+    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+    
+    # Remover index.php de las URLs
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+    
+    # Proteger archivos sensibles
+    <Files "*.log">
+        Order allow,deny
+        Deny from all
+    </Files>
+    
+    <Files "*.sql">
+        Order allow,deny
+        Deny from all
+    </Files>
+    
+    <Files ".htaccess">
+        Order allow,deny
+        Deny from all
+    </Files>
+</IfModule>
+
+# Configuración de directorios
+<Directory "/">
+    Options -Indexes +FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+# Configuración específica para InfinityFree
+<IfModule mod_php.c>
+    # Configuraciones específicas del hosting
+    php_value session.save_handler files
+    php_value session.save_path "/tmp"
+    php_value session.use_cookies 1
+    php_value session.use_only_cookies 1
+    php_value session.cookie_httponly 1
+    
+    # Configuración de zona horaria
+    php_value date.timezone "America/Bogota"
+    
+    # Configuración de caracteres
+    php_value default_charset "UTF-8"
+    
+    # Configuración de límites de archivos
+    php_value max_file_uploads 20
+    php_value file_uploads On
+</IfModule>
+
+# Configuración de errores personalizada
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php
+
+# Configuración de MIME types
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/svg+xml .svg
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+</IfModule>
+
+# Configuración de seguridad adicional
+<IfModule mod_rewrite.c>
+    # Bloquear acceso a archivos de configuración
+    RewriteRule ^(application|system|database) - [F,L]
+    
+    # Bloquear acceso a archivos de log
+    RewriteRule \.(log|sql|bak|old|tmp)$ - [F,L]
+</IfModule>
+
+# Configuración de headers de seguridad
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always append X-Frame-Options SAMEORIGIN
+    
+    # Prevenir MIME sniffing
+    Header always set X-Content-Type-Options nosniff
+    
+    # Prevenir XSS
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Configuración de referrer
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Configuración de permisos
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>

@@ -135,7 +135,7 @@ INSERT INTO viajes_detalles (viaje_id, orden, parada, hora_programada, hora_real
 (2, 3, 'Centro de Negocios', '09:45:00', '09:47:00', 8, 10),
 (2, 4, 'Terminal Oeste', '10:15:00', '10:15:00', 0, 25),
 
--- Detalles del viaje 3 (Sur - Centro)
+-- Detalles del viaje 3 (Sur - Centro)a
 (3, 1, 'Zona Sur', '10:00:00', '10:00:00', 18, 0),
 (3, 2, 'Mercado Sur', '10:20:00', '10:21:00', 10, 4),
 (3, 3, 'Hospital General', '10:40:00', '10:42:00', 6, 8),
