@@ -279,9 +279,15 @@ h6 {
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-white">Lista de Viajes</h6>
+        <?php if ($permissions->can_create('viajes')): ?>
         <button type="button" class="btn btn-light" onclick="showAddViajeModal()">
             <i class="fas fa-plus me-2"></i>Nuevo Viaje
         </button>
+        <?php else: ?>
+        <button type="button" class="btn btn-light" disabled title="No tienes permisos para crear viajes">
+            <i class="fas fa-plus me-2"></i>Nuevo Viaje
+        </button>
+        <?php endif; ?>
     </div>
     <div class="card-body">
         <?php if($this->session->flashdata('success')): ?>
@@ -344,18 +350,24 @@ h6 {
                                      <button class="btn btn-sm btn-info" onclick="viewViaje(<?php echo $viaje->id; ?>)">
                                          <i class="fas fa-eye"></i>
                                      </button>
+                                     
+                                     <?php if ($permissions->can_update('viajes')): ?>
                                      <button class="btn btn-sm btn-warning <?php echo ($viaje->estado == 'completado') ? 'btn-disabled-by-state' : ''; ?>" 
                                              onclick="editViaje(<?php echo $viaje->id; ?>)" 
                                              <?php echo ($viaje->estado == 'completado') ? 'disabled' : ''; ?>
                                              title="<?php echo ($viaje->estado == 'completado') ? 'Los viajes completados no se pueden editar' : 'Editar viaje'; ?>">
                                          <i class="fas fa-edit"></i>
                                      </button>
+                                     <?php endif; ?>
+                                     
+                                     <?php if ($permissions->can_delete('viajes')): ?>
                                      <button class="btn btn-sm btn-danger <?php echo ($viaje->estado != 'programado') ? 'btn-disabled-by-state' : ''; ?>" 
                                              onclick="deleteViaje(<?php echo $viaje->id; ?>)" 
                                              <?php echo ($viaje->estado != 'programado') ? 'disabled' : ''; ?>
                                              title="<?php echo ($viaje->estado != 'programado') ? 'Solo se pueden eliminar viajes programados' : 'Eliminar viaje'; ?>">
                                          <i class="fas fa-trash"></i>
                                      </button>
+                                     <?php endif; ?>
                                  </td>
                             </tr>
                             <!-- Fila de detalles expandible -->

@@ -170,9 +170,15 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-white">Lista de Conductores</h6>
+        <?php if ($permissions->can_create('conductores')): ?>
         <button type="button" class="btn btn-light" onclick="showAddConductorModal()">
             <i class="fas fa-plus me-2"></i>Nuevo Conductor
         </button>
+        <?php else: ?>
+        <button type="button" class="btn btn-light" disabled title="No tienes permisos para crear conductores">
+            <i class="fas fa-plus me-2"></i>Nuevo Conductor
+        </button>
+        <?php endif; ?>
     </div>
     <div class="card-body">
         <?php if($this->session->flashdata('success')): ?>
@@ -227,17 +233,24 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-info" onclick="editConductor(<?php echo $conductor->id; ?>)">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <?php if ($conductor->estado == 'suspendido'): ?>
-                                        <button class="btn btn-sm btn-success" onclick="reactivarConductor(<?php echo $conductor->id; ?>)" title="Reactivar Conductor">
-                                            <i class="fas fa-play"></i>
+                                    <?php if ($permissions->can_update('conductores')): ?>
+                                        <button class="btn btn-sm btn-info" onclick="editConductor(<?php echo $conductor->id; ?>)">
+                                            <i class="fas fa-edit"></i>
                                         </button>
+                                        <?php if ($conductor->estado == 'suspendido'): ?>
+                                            <button class="btn btn-sm btn-success" onclick="reactivarConductor(<?php echo $conductor->id; ?>)" title="Reactivar Conductor">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary">Solo Vista</span>
                                     <?php endif; ?>
+                                    
+                                    <?php if ($permissions->can_delete('conductores')): ?>
                                     <button class="btn btn-sm btn-danger" onclick="deleteConductor(<?php echo $conductor->id; ?>)">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

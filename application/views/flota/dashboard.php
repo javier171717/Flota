@@ -87,7 +87,7 @@
                     <?php if ($permissions->can_access('buses')): ?>
                     <div class="col-md-6 mb-3">
                         <a href="<?php echo base_url('flota/buses'); ?>" class="btn btn-primary btn-block w-100">
-                            <i class="fas fa-plus me-2"></i>Gestionar Buses
+                            <i class="fas fa-bus me-2"></i><?php echo $permissions->is_driver() ? 'Ver Buses' : 'Gestionar Buses'; ?>
                         </a>
                     </div>
                     <?php endif; ?>
@@ -95,7 +95,7 @@
                     <?php if ($permissions->can_access('conductores')): ?>
                     <div class="col-md-6 mb-3">
                         <a href="<?php echo base_url('flota/conductores'); ?>" class="btn btn-success btn-block w-100">
-                            <i class="fas fa-user-plus me-2"></i>Gestionar Conductores
+                            <i class="fas fa-user me-2"></i><?php echo $permissions->is_driver() ? 'Ver Conductores' : 'Gestionar Conductores'; ?>
                         </a>
                     </div>
                     <?php endif; ?>
@@ -103,7 +103,7 @@
                     <?php if ($permissions->can_access('rutas')): ?>
                     <div class="col-md-6 mb-3">
                         <a href="<?php echo base_url('flota/rutas'); ?>" class="btn btn-info btn-block w-100">
-                            <i class="fas fa-route me-2"></i>Gestionar Rutas
+                            <i class="fas fa-route me-2"></i><?php echo $permissions->is_driver() ? 'Ver Rutas' : 'Gestionar Rutas'; ?>
                         </a>
                     </div>
                     <?php endif; ?>
@@ -111,7 +111,15 @@
                     <?php if ($permissions->can_access('viajes')): ?>
                     <div class="col-md-6 mb-3">
                         <a href="<?php echo base_url('flota/viajes'); ?>" class="btn btn-warning btn-block w-100">
-                            <i class="fas fa-calendar-plus me-2"></i>Gestionar Viajes
+                            <i class="fas fa-calendar-alt me-2"></i><?php echo $permissions->is_driver() ? 'Ver Viajes' : 'Gestionar Viajes'; ?>
+                        </a>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <?php if ($permissions->can_see_tickets_dashboard()): ?>
+                    <div class="col-md-6 mb-3">
+                        <a href="<?php echo base_url('tickets'); ?>" class="btn btn-secondary btn-block w-100">
+                            <i class="fas fa-ticket-alt me-2"></i><?php echo $permissions->is_passenger() ? 'Mis Tickets' : 'Gestionar Tickets'; ?>
                         </a>
                     </div>
                     <?php endif; ?>

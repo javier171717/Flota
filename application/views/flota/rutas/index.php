@@ -146,9 +146,15 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-white">Lista de Rutas</h6>
+        <?php if ($permissions->can_create('rutas')): ?>
         <button type="button" class="btn btn-light" onclick="showAddRutaModal()">
             <i class="fas fa-plus me-2"></i>Nueva Ruta
         </button>
+        <?php else: ?>
+        <button type="button" class="btn btn-light" disabled title="No tienes permisos para crear rutas">
+            <i class="fas fa-plus me-2"></i>Nueva Ruta
+        </button>
+        <?php endif; ?>
     </div>
     <div class="card-body">
         <?php if($this->session->flashdata('success')): ?>
@@ -205,17 +211,24 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-info" onclick="editRuta(<?php echo $ruta->id; ?>)">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <?php if ($ruta->estado == 'inactivo'): ?>
-                                        <button class="btn btn-sm btn-success" onclick="reactivarRuta(<?php echo $ruta->id; ?>)" title="Reactivar Ruta">
-                                            <i class="fas fa-play"></i>
+                                    <?php if ($permissions->can_update('rutas')): ?>
+                                        <button class="btn btn-sm btn-info" onclick="editRuta(<?php echo $ruta->id; ?>)">
+                                            <i class="fas fa-edit"></i>
                                         </button>
+                                        <?php if ($ruta->estado == 'inactivo'): ?>
+                                            <button class="btn btn-sm btn-success" onclick="reactivarRuta(<?php echo $ruta->id; ?>)" title="Reactivar Ruta">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary">Solo Vista</span>
                                     <?php endif; ?>
+                                    
+                                    <?php if ($permissions->can_delete('rutas')): ?>
                                     <button class="btn btn-sm btn-danger" onclick="deleteRuta(<?php echo $ruta->id; ?>)">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -213,9 +213,15 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-white">Lista de Buses</h6>
+        <?php if ($permissions->can_create('buses')): ?>
         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addBusModal">
             <i class="fas fa-plus me-2"></i>Nuevo Bus
         </button>
+        <?php else: ?>
+        <button type="button" class="btn btn-light" disabled title="No tienes permisos para crear buses">
+            <i class="fas fa-plus me-2"></i>Nuevo Bus
+        </button>
+        <?php endif; ?>
     </div>
     <div class="card-body">
         <?php if($this->session->flashdata('success')): ?>
@@ -280,27 +286,34 @@
                                     }
                                     ?>
                                     
-                                    <?php if ($tiene_viajes): ?>
-                                        <!-- Bus con viajes - solo permitir cambio de estado -->
-                                        <button class="btn btn-sm btn-warning" onclick="editBusEstado(<?php echo $bus->id; ?>)" title="Solo cambiar estado (tiene viajes asociados)">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <span class="badge bg-info ms-1" title="Este bus tiene viajes asociados">Viajes</span>
+                                    <?php if ($permissions->can_update('buses')): ?>
+                                        <?php if ($tiene_viajes): ?>
+                                            <!-- Bus con viajes - solo permitir cambio de estado -->
+                                            <button class="btn btn-sm btn-warning" onclick="editBusEstado(<?php echo $bus->id; ?>)" title="Solo cambiar estado (tiene viajes asociados)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <span class="badge bg-info ms-1" title="Este bus tiene viajes asociados">Viajes</span>
+                                        <?php else: ?>
+                                            <!-- Bus sin viajes - permitir edición completa -->
+                                            <button class="btn btn-sm btn-info" onclick="editBus(<?php echo $bus->id; ?>)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($bus->estado == 'inactivo'): ?>
+                                            <button class="btn btn-sm btn-success" onclick="reactivarBus(<?php echo $bus->id; ?>)" title="Reactivar Bus">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                        <?php endif; ?>
                                     <?php else: ?>
-                                        <!-- Bus sin viajes - permitir edición completa -->
-                                        <button class="btn btn-sm btn-info" onclick="editBus(<?php echo $bus->id; ?>)">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
+                                        <span class="badge bg-secondary">Solo Vista</span>
                                     <?php endif; ?>
                                     
-                                    <?php if ($bus->estado == 'inactivo'): ?>
-                                        <button class="btn btn-sm btn-success" onclick="reactivarBus(<?php echo $bus->id; ?>)" title="Reactivar Bus">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                    <?php endif; ?>
+                                    <?php if ($permissions->can_delete('buses')): ?>
                                     <button class="btn btn-sm btn-danger" onclick="deleteBus(<?php echo $bus->id; ?>)">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -185,6 +185,190 @@
             border-color: #95a5a6 !important;
         }
         
+        /* ===== ESTILOS PARA EL ROL DEL USUARIO ===== */
+        .user-info .text-danger {
+            color: #ff6b6b !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(255, 107, 107, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .user-info .text-warning {
+            color: #ffd93d !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(255, 217, 61, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 217, 61, 0.3);
+        }
+        
+        .user-info .text-info {
+            color: #4ecdc4 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(78, 205, 196, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+        
+        .user-info .text-success {
+            color: #95e1d3 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(149, 225, 211, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(149, 225, 211, 0.3);
+        }
+        
+        .user-info .text-light {
+            color: #f8f9fa !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(248, 249, 250, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(248, 249, 250, 0.3);
+        }
+        
+        /* Hover effects para el rol */
+        .user-info small:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        /* ===== ESTILOS PARA TÍTULOS MEJORADOS ===== */
+        .page-title-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .page-title {
+            font-size: 2.2rem !important;
+            font-weight: 700 !important;
+            color: #2c3e50 !important;
+            margin-bottom: 0.5rem !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .page-title i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .title-underline {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        /* Estilos específicos por tipo de título */
+        .title-buses i {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-routes i {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-trips i {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-drivers i {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-tickets i {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-profile i {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-dashboard i {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Efectos hover para títulos */
+        .page-title:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .page-title:hover + .title-underline {
+            transform: scaleX(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        
+        /* Responsive para títulos */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem !important;
+                text-align: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            
+            .page-title i {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                margin-right: 0 !important;
+            }
+            
+            .title-underline {
+                margin: 0.5rem auto 0 auto;
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .page-title i {
+                font-size: 1.8rem;
+            }
+        }
+        
         /* Estilos responsivos para móviles */
         @media (max-width: 768px) {
             .sidebar {
@@ -364,8 +548,28 @@
                                     <?php echo $this->session->userdata('nombre'); ?>
                                 </small>
                                 <br>
-                                <small class="text-muted">
-                                    <?php echo ucfirst($this->session->userdata('rol')); ?>
+                                <?php 
+                                $rol = $this->session->userdata('rol');
+                                $rol_class = '';
+                                switch($rol) {
+                                    case 'admin':
+                                        $rol_class = 'text-danger fw-bold'; // Rojo para admin
+                                        break;
+                                    case 'operador':
+                                        $rol_class = 'text-warning fw-bold'; // Amarillo para operador
+                                        break;
+                                    case 'conductor':
+                                        $rol_class = 'text-info fw-bold'; // Azul para conductor
+                                        break;
+                                    case 'pasajero':
+                                        $rol_class = 'text-success fw-bold'; // Verde para pasajero
+                                        break;
+                                    default:
+                                        $rol_class = 'text-light fw-bold'; // Blanco por defecto
+                                }
+                                ?>
+                                <small class="<?php echo $rol_class; ?>">
+                                    <?php echo ucfirst($rol); ?>
                                 </small>
                             </div>
                         <?php endif; ?>
@@ -434,7 +638,53 @@
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><?php echo $title; ?></h1>
+                    <div class="page-title-container">
+                        <?php 
+                        // Determinar el icono y estilo según el título
+                        $title_icon = '';
+                        $title_class = '';
+                        $title_color = '';
+                        
+                        if (strpos(strtolower($title), 'bus') !== false) {
+                            $title_icon = 'fas fa-bus';
+                            $title_class = 'title-buses';
+                            $title_color = 'linear-gradient(135deg, #3498db, #2980b9)';
+                        } elseif (strpos(strtolower($title), 'ruta') !== false) {
+                            $title_icon = 'fas fa-route';
+                            $title_class = 'title-routes';
+                            $title_color = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                        } elseif (strpos(strtolower($title), 'viaje') !== false) {
+                            $title_icon = 'fas fa-calendar-alt';
+                            $title_class = 'title-trips';
+                            $title_color = 'linear-gradient(135deg, #f39c12, #e67e22)';
+                        } elseif (strpos(strtolower($title), 'conductor') !== false) {
+                            $title_icon = 'fas fa-user-tie';
+                            $title_class = 'title-drivers';
+                            $title_color = 'linear-gradient(135deg, #9b59b6, #8e44ad)';
+                        } elseif (strpos(strtolower($title), 'ticket') !== false) {
+                            $title_icon = 'fas fa-ticket-alt';
+                            $title_class = 'title-tickets';
+                            $title_color = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                        } elseif (strpos(strtolower($title), 'perfil') !== false) {
+                            $title_icon = 'fas fa-user-cog';
+                            $title_class = 'title-profile';
+                            $title_color = 'linear-gradient(135deg, #34495e, #2c3e50)';
+                        } elseif (strpos(strtolower($title), 'dashboard') !== false) {
+                            $title_icon = 'fas fa-tachometer-alt';
+                            $title_class = 'title-dashboard';
+                            $title_color = 'linear-gradient(135deg, #667eea, #764ba2)';
+                        } else {
+                            $title_icon = 'fas fa-file-alt';
+                            $title_class = 'title-default';
+                            $title_color = 'linear-gradient(135deg, #95a5a6, #7f8c8d)';
+                        }
+                        ?>
+                        <h1 class="h2 page-title <?php echo $title_class; ?>">
+                            <i class="<?php echo $title_icon; ?> me-3"></i>
+                            <?php echo $title; ?>
+                        </h1>
+                        <div class="title-underline" style="background: <?php echo $title_color; ?>;"></div>
+                    </div>
                 </div>
                 
                 <!-- JavaScript para menú móvil -->

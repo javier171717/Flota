@@ -63,15 +63,33 @@ class Flota extends CI_Controller {
         $this->load->view('flota/test_permissions', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Método para probar el sistema de permisos actualizado
+     */
+    public function test_permissions_updated() {
+        $data['title'] = 'Prueba de Permisos Actualizados';
+        $data['permissions'] = $this->permissions;
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('flota/test_permissions_updated', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function buses() {
-        // Verificar permisos: solo admin puede gestionar buses
+        // Verificar permisos: conductores pueden ver pero no gestionar
         if (!$this->permissions->can_access('buses')) {
             $this->session->set_flashdata('error', 'No tienes permisos para acceder a esta sección');
             redirect('flota');
         }
         
-        $data['title'] = 'Gestión de Buses';
+        // Determinar el título según el rol
+        if ($this->permissions->is_driver()) {
+            $data['title'] = 'Vista de Buses';
+        } else {
+            $data['title'] = 'Gestión de Buses';
+        }
+        
         $data['buses'] = $this->Buses_model->get_all();
         $data['permissions'] = $this->permissions;
         
@@ -91,13 +109,19 @@ class Flota extends CI_Controller {
     }
 
     public function conductores() {
-        // Verificar permisos: solo admin puede gestionar conductores
+        // Verificar permisos: conductores pueden ver pero no gestionar
         if (!$this->permissions->can_access('conductores')) {
             $this->session->set_flashdata('error', 'No tienes permisos para acceder a esta sección');
             redirect('flota');
         }
         
-        $data['title'] = 'Gestión de Conductores';
+        // Determinar el título según el rol
+        if ($this->permissions->is_driver()) {
+            $data['title'] = 'Vista de Conductores';
+        } else {
+            $data['title'] = 'Gestión de Conductores';
+        }
+        
         $data['conductores'] = $this->Conductores_model->get_all();
         $data['permissions'] = $this->permissions;
         
@@ -107,13 +131,19 @@ class Flota extends CI_Controller {
     }
 
     public function rutas() {
-        // Verificar permisos: admin y operador pueden ver rutas, solo admin puede gestionar
+        // Verificar permisos: conductores pueden ver pero no gestionar
         if (!$this->permissions->can_access('rutas')) {
             $this->session->set_flashdata('error', 'No tienes permisos para acceder a esta sección');
             redirect('flota');
         }
         
-        $data['title'] = 'Gestión de Rutas';
+        // Determinar el título según el rol
+        if ($this->permissions->is_driver()) {
+            $data['title'] = 'Vista de Rutas';
+        } else {
+            $data['title'] = 'Gestión de Rutas';
+        }
+        
         $data['rutas'] = $this->Rutas_model->get_all();
         $data['permissions'] = $this->permissions;
         
@@ -123,22 +153,23 @@ class Flota extends CI_Controller {
     }
 
     public function viajes() {
-        // Verificar permisos: admin, operador y conductor pueden acceder a viajes
+        // Verificar permisos: conductores pueden ver pero no gestionar
         if (!$this->permissions->can_access('viajes')) {
             $this->session->set_flashdata('error', 'No tienes permisos para acceder a esta sección');
             redirect('flota');
         }
         
-        $data['title'] = 'Gestión de Viajes';
+        // Determinar el título según el rol
+        if ($this->permissions->is_driver()) {
+            $data['title'] = 'Vista de Viajes';
+        } else {
+            $data['title'] = 'Gestión de Viajes';
+        }
+        
         $data['permissions'] = $this->permissions;
         
-        // Si es conductor, mostrar solo sus viajes
-        if ($this->permissions->is_driver()) {
-            $conductor_id = $this->session->userdata('user_id');
-            $data['viajes'] = $this->Viajes_model->get_by_conductor($conductor_id);
-        } else {
-            $data['viajes'] = $this->Viajes_model->get_all_with_details();
-        }
+        // Los conductores pueden ver todos los viajes pero no gestionarlos
+        $data['viajes'] = $this->Viajes_model->get_all_with_details();
         
         $data['buses'] = $this->Buses_model->get_all();
         $data['conductores'] = $this->Conductores_model->get_all();

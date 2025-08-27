@@ -32,21 +32,21 @@ class Permissions {
         ),
         'conductor' => array(
             'dashboard' => 'read',
-            'buses' => 'none',
+            'buses' => 'read',      // Cambiado de 'none' a 'read' - puede ver pero no gestionar
             'conductores' => 'none',
             'rutas' => 'read',      // Solo ver rutas
-            'viajes' => 'limited',  // Solo ver y actualizar sus viajes
+            'viajes' => 'read',     // Cambiado de 'limited' a 'read' - puede ver todos los viajes
             'usuarios' => 'none',
-            'tickets' => 'read',    // Conductores pueden ver tickets de sus viajes
+            'tickets' => 'none',    // Cambiado de 'read' a 'none' - no aparece en dashboard
             'reportes' => 'limited',
             'configuracion' => 'none'
         ),
         'pasajero' => array(
-            'dashboard' => 'limited',    // Solo ver sus tickets y viajes
-            'buses' => 'none',          // Sin acceso
-            'conductores' => 'none',    // Sin acceso
+            'dashboard' => 'read',      // Cambiado de 'limited' a 'read' - acceso completo a vistas
+            'buses' => 'read',          // Cambiado de 'none' a 'read' - puede ver buses
+            'conductores' => 'none',    // Cambiado de 'read' a 'none' - no debe ver información personal
             'rutas' => 'read',          // Ver rutas disponibles
-            'viajes' => 'limited',      // Ver viajes disponibles y comprar
+            'viajes' => 'read',         // Cambiado de 'limited' a 'read' - ver viajes disponibles
             'usuarios' => 'none',       // Sin acceso
             'tickets' => 'full',        // Gestionar sus propios tickets
             'reportes' => 'none',       // Sin acceso
@@ -167,6 +167,17 @@ class Permissions {
             return true; // Los pasajeros pueden gestionar sus tickets
         }
         return $this->can_access('tickets', 'create');
+    }
+    
+    /**
+     * Verificar si el usuario puede ver la sección de tickets en el dashboard
+     */
+    public function can_see_tickets_dashboard() {
+        // Los conductores no ven tickets en el dashboard
+        if ($this->is_driver()) {
+            return false;
+        }
+        return $this->can_access('tickets', 'read');
     }
     
     /**
